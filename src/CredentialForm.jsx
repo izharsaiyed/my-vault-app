@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function CredentialForm() {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ export default function CredentialForm() {
 
   const [selectedLang, setSelectedLang] = useState('English (US)');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+const [showPassword, setShowPassword] = useState(false);
 
   const languages = [
     'English (US)',
@@ -168,27 +170,42 @@ export default function CredentialForm() {
             />
           </div>
 
-          <div style={{ marginBottom: '16px' }}>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              style={{ 
-                width: '100%', 
-                padding: '15px 14px', 
-                borderRadius: '12px', 
-                border: '1px solid #262626', 
-                backgroundColor: '#1C1C1E', 
-                color: '#FFF',
-                fontSize: '14px',
-                outline: 'none',
-                boxSizing: 'border-box'
-              }}
-            />
-          </div>
+         <div style={{ marginBottom: '16px', position: 'relative' }}>
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    placeholder="Password"
+    value={formData.password}
+    onChange={handleChange}
+    required
+    style={{
+      width: '100%',
+      padding: '15px 45px 15px 14px',
+      borderRadius: '12px',
+      border: '1px solid #262626',
+      backgroundColor: '#1C1C1E',
+      color: '#FFF',
+      fontSize: '14px',
+      outline: 'none',
+      boxSizing: 'border-box'
+    }}
+  />
+
+  <span
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: 'absolute',
+      right: '15px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      cursor: 'pointer',
+      color: '#A8A8A8',
+      fontSize: '18px'
+    }}
+  >
+    {showPassword ? <FaEyeSlash /> : <FaEye />}
+  </span>
+</div>
 
           <button type="submit" style={{ 
             width: '100%', 
